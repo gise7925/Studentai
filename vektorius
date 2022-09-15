@@ -1,0 +1,97 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <iomanip>
+
+using std::cout;
+using std::cin;
+using std::string;
+using namespace std;
+using std::endl;
+using std::vector;
+
+struct duomenys {
+    string Vard, Pav;
+    vector<int> paz = { 0 };
+    int egz;
+    float Galutinis = 0;
+};
+
+void Mediana(vector<int> pazymiai) 
+{
+    int sk = 0;
+    for (int i = 0; i < pazymiai.size(); i++)
+    {
+        if (pazymiai[i] != 0)
+        {
+            sk++;
+        }
+        if (pazymiai[i] == -1)
+        {
+            pazymiai[i] = 0;
+            sk--;
+            break;
+        }
+    }
+    if (sk % 2 == 0)
+    {
+        cout << float(((pazymiai[sk / 2 - 1]) + (pazymiai[(sk / 2)])) / 2.0);
+    }
+    else
+    {
+        cout << pazymiai[(sk / 2)];
+    }
+    cout << endl;
+}
+
+int generuojami_pazymiai() 
+{
+    srand(time(NULL));
+    return rand() % 10 + 1;
+}
+
+void automatiskai_ivedami_pazymiai(duomenys Eil[], int i, int viso_pazymiu)
+{
+    Eil[i].egz = generuojami_pazymiai();
+    for (int x = 0; x < viso_pazymiu; x++)
+    {
+        Eil[i].paz.push_back(generuojami_pazymiai());
+    }
+    Eil[i].Galutinis = Eil[i].Galutinis / viso_pazymiu;
+    Eil[i].Galutinis = Eil[i].Galutinis * 0.4 + 0.6 * Eil[i].egz;
+}
+
+void ivedimas_ranka(duomenys Eil[], int i) 
+{
+    int temp;
+    do {
+        cout << "Iveskite studento egzamino rezultata:\n";
+        cin >> Eil[i].egz;
+    } while (Eil[i].egz < 0 || Eil[i].egz > 10);
+    cout << "Iveskite studento pazymius (kai baigsite, iveskite -1 (minus vienas)):";
+    int sk = 0;
+    do {
+        cin >> temp;
+        Eil[i].paz.push_back(temp);
+        if (Eil[i].paz.at(sk) != -1) { Eil[i].Galutinis = Eil[i].Galutinis + (float)Eil[i].paz.at(sk); }
+        sk++;
+    } while (Eil[i].paz.at(sk) != -1);
+    sk--;
+    Eil[i].Galutinis = Eil[i].Galutinis / sk;
+    Eil[i].Galutinis = Eil[i].Galutinis * 0.4 + 0.6 * Eil[i].egz;
+}
+void vardo_ivedimas(duomenys Eil[], int i) 
+{
+    cout << "Iveskite studento nr. " << i + 1 << " duomenis:\n";
+    do {
+        cout << "Iveskite studento nr. " << i + 1 << " vardas:\n";
+        cin >> Eil[i].Vard;
+    } 
+      while (Eil[i].Vard.length() < 0 || Eil[i].Vard.length() > 25);
+  
+    do {
+        cout << "Iveskite studento nr. " << i + 1 << " pavarde:\n";
+        cin >> Eil[i].Pav;
+    } while (Eil[i].Pav.length() < 0 && Eil[i].Pav.length() > 25);
+ 
+}
