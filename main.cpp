@@ -55,7 +55,6 @@ int main()
         BoolCheck(arFailas);
 
         if (arFailas) { // skaitomi is failo
-            //failoNuskaitymas(eilinis, ndCheck, ndCount, stKiekis);
             ifstream infile("kursiokai1000.txt");
             if (infile.is_open()) { // paprastuju failu nuskaitymas
                 string line, ignore;
