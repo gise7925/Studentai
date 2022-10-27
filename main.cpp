@@ -4,17 +4,21 @@
 
 int main()
 {
-    bool check = false, balas = false, arNulis = false, arMediana = false, arFailas = false, arAuto = false, arGeneruoti;
-    int ndKiekis, stKiekis = 0;
+    bool check = false, balas = false, arNulis = false, arVektorius = false, arMediana = false, arFailas = false, arAuto = false, arGeneruoti;
+    int ndKiekis, stKiekis, duom = 0;
     string ndCheck = "";
     int ndCount = 0;
 
     Studentas studentas;
 
     vector<Studentas> stud;
-
     vector<Studentas> vargsiukai;
     vector<Studentas> galvociai;
+
+    list<Studentas> lStud;
+    list<Studentas> lVargsiukai;
+    list<Studentas> lGalvociai;
+
 
     chrono::time_point<chrono::system_clock> start, end;
     chrono::time_point<chrono::system_clock> startEvent, endEvent;
@@ -24,37 +28,95 @@ int main()
     chrono::duration<double> elapsed_seconds;
 
     if (arGeneruoti) {
-        /* 1000 irasu */
-        vargsiukai.push_back(studentas);
-        galvociai.push_back(studentas);
 
-        Dalykai(vargsiukai, galvociai, stud, 1000);
+        /* Testing of vector */
+        cout << "Ar norite atlikti analize vektoriu (1) ar list(0)?: ";
+        BoolCheck(arVektorius);
+        if (arVektorius) {
+            cout << "Test of Vector: \n\n";
+            cout << "----------------------------------------------------------";
+            cout << "Keliu duomenu faila norite testuoti? (1000, 10000, 100000, 10000000, 10000000: "; cin >> duom;
+            if (duom == 1000) {
+                /* 1000 irasu */
+                stud.push_back(studentas);
+                vargsiukai.push_back(studentas);
+                galvociai.push_back(studentas);
 
-        // 10 000 irasu
-        stud = {}; vargsiukai = {}; galvociai = {}; // vektoriu isvalymas nuo praeitu irasu
-        Dalykai(vargsiukai, galvociai, stud, 10000);
+                ContainerTesting_vector(vargsiukai, galvociai, stud, 1000);
+            }
+            else if (duom == 10000) {
+                // 10 000 irasu
+                stud = {}; vargsiukai = {}; galvociai = {}; // vektoriu isvalymas nuo praeitu irasu
+                stud.clear(); vargsiukai.clear(); galvociai.clear();
+                ContainerTesting_vector(vargsiukai, galvociai, stud, 10000);
+            }
+            else if (duom == 100000) {
+                stud = {}; vargsiukai = {}; galvociai = {}; // vektoriu isvalymas nuo praeitu irasu
+                stud.clear(); vargsiukai.clear(); galvociai.clear();
+                ContainerTesting_vector(vargsiukai, galvociai, stud, 100000);
+            }
+            else if (duom == 1000000) {  // 1 000 000 irasu
+                stud = {}; vargsiukai = {}; galvociai = {}; // vektoriu isvalymas nuo praeitu irasu
+                stud.clear(); vargsiukai.clear(); galvociai.clear();
+                ContainerTesting_vector(vargsiukai, galvociai, stud, 1000000);
+            }
+            else if (duom == 10000000) {
+                // 10 000 000 irasu
+                stud = {}; vargsiukai = {};galvociai = {}; // vektoriu isvalymas nuo praeitu irasu
+                stud.clear(); vargsiukai.clear(); galvociai.clear();
+                ContainerTesting_vector(vargsiukai, galvociai, stud, 10000000);
+            }
+            else {
+                cout << "Klaida";
+            }
+        }
+        else {
+            /* Testing of list */
+            cout << "Test of List: \n\n";
+            cout << "---------------------------------------------------------------------------";
+            cout << "Keliu duomenu faila norite testuoti? (1000, 10000, 100000, 10000000, 10000000: "; cin >> duom;
+            if (duom == 1000) {
+                lStud.push_back(studentas);
+                lVargsiukai.push_back(studentas);
+                lGalvociai.push_back(studentas);
 
-        // 100 000 irasu
-        stud = {}; vargsiukai = {}; galvociai = {};
-        Dalykai(vargsiukai, galvociai, stud, 100000);
-
-        // 1 000 000 irasu
-        stud = {}; vargsiukai = {}; galvociai = {};
-        Dalykai(vargsiukai, galvociai, stud, 1000000);
-        stud.clear();
-        vargsiukai.clear();
-        galvociai.clear();
-        // 10 000 000 irasu
-        stud = {}; vargsiukai = {}; galvociai = {};
-        Dalykai(vargsiukai, galvociai, stud, 10000000);
-
-
+                ContainerTesting_list(lVargsiukai, lGalvociai, lStud, 1000);
+            }
+            else if (duom == 10000) {
+                // 10 000 irasu
+                lStud = {}; lVargsiukai = {}; lGalvociai = {}; // listu isvalymas nuo praeitu irasu
+                lStud.clear(); lVargsiukai.clear(); lGalvociai.clear();
+                ContainerTesting_list(lVargsiukai, lGalvociai, lStud, 10000);
+            }
+            else if (duom == 100000) {
+                // 100 000 irasu
+                lStud = {};lVargsiukai = {}; lGalvociai = {};  // listu isvalymas nuo praeitu irasu
+                lStud.clear(); lVargsiukai.clear(); lGalvociai.clear();
+                ContainerTesting_list(lVargsiukai, lGalvociai, lStud, 100000);
+            }
+            else if (duom == 1000000) {
+                // 1 000 000 irasu
+                lStud = {};lVargsiukai = {}; lGalvociai = {};  // listu isvalymas nuo praeitu irasu
+                lStud.clear(); lVargsiukai.clear(); lGalvociai.clear();
+                ContainerTesting_list(lVargsiukai, lGalvociai, lStud, 1000000);
+            }
+            else if (duom == 10000000) {
+                // 10 000 000 irasu
+                lStud = {}; lVargsiukai = {}; lGalvociai = {};  // listu isvalymas nuo praeitu irasu
+                lStud.clear(); lVargsiukai.clear(); lGalvociai.clear();
+                ContainerTesting_list(lVargsiukai, lGalvociai, lStud, 10000000);
+            }
+            else {
+                cout << "Klaida";
+            }
+        }
     }
     else {
         cout << "\nAr norite suvesti studento duomenis patys, ar nuskaityti juos is failo? Iveskite '0' jei norite ivesti patys, ir '1' jei norite vykdyti nuskaityma is failo: ";
         BoolCheck(arFailas);
 
         if (arFailas) { // skaitomi is failo
+            //failoNuskaitymas(stud, ndCheck, ndCount, stKiekis);
             ifstream infile("kursiokai1000.txt");
             if (infile.is_open()) { // paprastuju failu nuskaitymas
                 string line, ignore;
