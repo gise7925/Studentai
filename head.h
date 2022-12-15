@@ -1,40 +1,58 @@
-#pragma once
+#pragma
+#include <chrono>
 #include <iostream>
-#include <algorithm>    // std::any_of
-#include <iomanip>      // std::setprecision
-#include <vector>
-#include <random>
 #include <fstream>
 #include <string>
-#include <iterator>
+#include <iomanip>
+#include <algorithm>
+#include <chrono>
+#include <vector>
+#include <sstream>
+#include <random>
+#include <list>
 #include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
-struct Studentas {
 
-    string vardas, pavarde;
-    int n = 0;
-    vector<double> ND;
-    double egz = 0, galVid = 0, galMed = 0;
+struct studentas
+{
+    string vard;
+    string pavard;
+    vector <int> nd;
+    int egz;
+    float gal;
+    float galmed;
 };
 
-void DigitCheck(string& stringas, bool check);
-void SymbolCheck(double& skaicius, bool check, bool balas);
-void SymbolCheck(int& skaicius, bool check, bool balas);
-void BoolCheck(bool& arMediana);
-double VectorSymbolCheck();
-double Mediana(vector<double>& nd);
-double Vidurkis(vector<double>& nd, double egz);
-//void isvedimas(string &vardas, string &pavarde, double &vid, double &med);
-void Isvedimas(vector<Studentas>& stud);
-void Isvedimas(vector<Studentas>& stud, int kiekis);
-//void failoNuskaitymas(vector<Studentas>& eilinis, string &ndCheck, int& ndCount, int& stKiekis);
-bool CompareByLength(const Studentas& a, const Studentas& b);
-string Generuoti(vector<Studentas>& stud, int kiekis);
-void Nuskaityti(vector<Studentas>& stud, int kiekis, string failas);
-void Rusiuoti(vector<Studentas>& stud, int kiekis);
-bool Maziau(const Studentas& a, const Studentas& b);
-void Skirstyti(vector<Studentas>& stud, int kiekis, int& vargKiekis, int& protKiekis, vector<Studentas>& vargsiukai, vector<Studentas>& galvociai);
-void Isvedimas(vector<Studentas> vektorius, int kiekis, string failoPav);
-void Dalykai(vector<Studentas>& vargsiukai, vector<Studentas>& galvociai, vector<Studentas>& stud, int kiekis);
+void Exists_test(const string& name);
+void Skaicius(int& a);
+void Ivestisranka(vector <studentas>& stud);
+int Kiekpazymiu();
+void Ivestis(vector <studentas>& stud);
+bool Palyginimas(studentas& a, studentas& b);
+void Isvestis(vector <studentas> stud);
+void Failugeneracija(int kieknd);
+void Failgen(int kieknd, int kiekstud);
+
+void Greicioanalizevector(int kiekstud);
+void Rusiavimasvector(vector <studentas>& stud, vector <studentas>& vargsiukai, vector <studentas>& galvociai);
+
+void Greicioanalizelist(int kiekstud);
+void Rusiavimaslist(list <studentas>& stud, list <studentas>& vargsiukai, list <studentas>& galvociai);
+void Vargsiukaiifaila(int kieknd, vector <studentas> vargsiukai, int kiekstud);
+void Galvociaiifaila(int kieknd, vector <studentas> galvociai, int kiekstud);
+
+//antra strategija
+
+void Greicioanalizevector2(int kiekstud);
+void Rusiavimasvector2(vector <studentas>& stud, vector <studentas>& nend);
+void Vargsiukaiifaila2(int kieknd, vector <studentas> vargsiukai, int kiekstud);
+void Galvociaiifaila2(int kieknd, vector <studentas> stud, int kiekstud);
+
+void Greicioanalizelist2(int kiekstud);
+void Rusiavimaslist2(list <studentas>& stud, list <studentas>& vargsiukai);
+void Vargsiukaiifailalist2(int kieknd, list <studentas> nend, int kiekstud);
+void Galvociaiifailalist2(int kieknd, list <studentas> stud, int kiekstud);
+
